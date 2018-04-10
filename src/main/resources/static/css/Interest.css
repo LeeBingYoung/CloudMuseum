@@ -1,0 +1,102 @@
+@charset "utf-8";
+body{ padding:0px; margin:0px;}
+/* CSS Document */
+    .danwei{ width:380px; height:382px; background-color:#f2f2f2; margin-top:40px;float:left;}
+	.danwei a{ text-decoration:none;font-size:23px; color:#333333; padding-left:20px; text-align: left;}
+	.danwei img{display:block; margin-top:-26px;}
+.kuan{width:1200px; margin:0 auto;}
+.shuru{ width:600px; height:30px; margin-top:10px; background-color:#FFF; border:#CCC solid 1px;float:left; margin-left:100px;}
+#shuru{ width:575px; height:28px; border:none;}
+.denglu{ float:left;margin-top:10px; margin-left:20px}
+.zhuti{ width:1200px; margin:0 auto;background-color:#f39800; overflow:hidden; margin-top:20px;}
+.zhuti img{ display:block; float:left; }
+
+.zhutiwenzi{margin-top:100px; margin-left:50px; width:250px;float:left; }
+.zhutiwenzi a{ color:#FFF; font-size:30px; text-decoration:none;}
+ 
+ 
+ .quanzi{width:1200px; margin:0 auto; margin-top:20px;}
+ .danweii{width:380px; height:580px;background-color:#f2f2f2; float:left; border:none; margin-bottom:20px;}
+ #touxiang{ display:block; float:left; margin-top:16px; margin-left:16px;}
+ #mingcheng{ display:block; float:left;margin-top:26px; margin-left:16px;}
+ #wenti{display:block;width:340px;margin:0 auto; margin-top:40px; margin-bottom:20px;}
+ #zhutu{display:block;width:340px;margin:0 auto; margin-top:20px; margin-bottom:20px;}
+ .mingzi{display:block;width:340px;margin:0 auto; margin-top:20px; margin-bottom:20px;}
+ .mingzi img{ display:block; float:left; margin-right:10px;}
+ .mingzi a{ display:block; float:left;}
+ .fenxiang{display:block;width:320px;margin:0 auto; margin-top:20px; margin-bottom:20px;}
+ #zuo{ float:left;}
+ #you{ float:right;}
+ #anniu{ padding-top:6px; padding-bottom:6px; padding-left:40px; padding-right:40px; border-radius:4px; border:#FFF solid 1px; background-color:inherit; color:#FFF; font-size:24px;}
+
+ .tankuang_bg{
+	 position:fixed;
+	 _position: absolute;
+	 top:0;
+	 left:0;
+	 width:100%;
+	 height:100%;
+	background-color: #000000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+	z-index: 8888;
+	display:none;
+	_top: expression(eval(document.documentElement.scrollTop));
+ }
+ .tankuang{
+	 width:760px;
+	 height:450px;
+	 position:fixed;
+	 top:50%;
+	 left:50%;
+	 margin-top:-225px;
+	 margin-left:-380px;
+	 background:#fff;
+	 z-index:9999;
+	 display:none;
+ }
+ .tankuang  .tk{
+	 height:55px;
+	 width: 102%;
+	 background:#f39800;
+	 padding:0;
+	 margin:0;
+ }
+  .tankuang  .tk a{
+	  float:right;
+	  margin-top:15px;
+	  margin-right:10px;
+  }
+ .tankuang .tk_cont{
+	color:#666666;
+	padding-top:40px;
+	padding-left:70px;
+ }
+  .tankuang .tk_cont p{
+	  line-height:30px;
+	  padding: 0;
+    margin: 0;
+  }
+  
+ .tk_cont input {
+	 width:420px;
+	 height:30px;
+	 border:1px solid #999;
+	 margin-top:35px;
+	 margin-bottom:15px;
+ } 
+ .tk_cont input.submit{
+	 border:1px solid #f39800;
+	 color:#f39800;
+	 width:69px;
+	 height:30px;
+	 background:#fff;
+	 margin-left: 353px;
+	 margin-top:0;
+	 margin-bottom:0;
+ }
+ 
+ 
+ 

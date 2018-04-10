@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/images/favicon.ico">
+    <title>请登录</title>
+    <link href="/static/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/docs/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <script src="/static/docs/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="/static/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>您好，请登录</h1>
+            <br/>
+            <p>为了您可以获得更好的使用体验，并且方便我们为您推荐更好的作品，请您登录后浏览评论，谢谢！</p>
+            <br/>
+            <form action="/HomeArtLogin">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1" style="width: 120px">用户名</span>
+                    <input type="text" class="form-control" placeholder="Username" style="width: 550px" name="username"
+                           data-fv-message="The username is not valid"
+                           required data-fv-notempty-message="用户名不能为空"
+                           pattern="^[a-zA-Z0-9]+$" data-fv-regexp-message="用户名只能用字母或数字"
+                           data-fv-stringlength="true"
+                           data-fv-stringlength-min="6"
+                           data-fv-stringlength-max="30"
+                           data-fv-stringlength-message="用户名必须为6-15位字母或数字"
+                           data-fv-remote="true">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <span class="input-group-addon" style="width: 120px">密码</span>
+                    <input type="password" class="form-control" placeholder="Password" style="width: 550px" name="password"
+                           required data-fv-notempty-message="密码不能为空"
+                           data-fv-different="true" data-fv-different-field="username"
+                           data-fv-different-message="密码不能和用户名相同">
+                </div>
+                <br/>
+                <br/>
+                <button class="btn btn-primary btn-lg" type="submit" name="submit">登录</button>
+            </form>
+            <br/>
+            <p><a class="btn btn-primary btn-info" href="/HomeArt">如需注册，请点这里</a></p>
+        </div>
+    </div>
+    <script src="/static/js/googleapisjquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/static/docs/dist/js/bootstrap.min.js"></script>
+    <script src="/static/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

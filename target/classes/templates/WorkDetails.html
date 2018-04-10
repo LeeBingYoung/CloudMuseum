@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>艺术品</title>
+    <link href="/static/css/WorkDetails.css" rel="stylesheet">
+    <link href="/static/css/maxcdnfont-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/Style.css">
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="/static/js/csdnjquery.min.js"></script>
+    <script src="/static/js/csdnbootstrap.min.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/assets/css/ie10-viewport-bug-workaround.css">
+    <script src="/static/js/docs.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/classie.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body onload="onLoad()">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="/HomeArt">艺术品</a></li>
+                        <li><a href="/HomeStory">艺术故事</a></li>
+                        <li><a href="/HomeCol">艺术专栏</a></li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default" 	data-toggle="dropdown">
+                            个人设置（有
+                            #if($Count)
+                            ${Count}
+                            #end
+                            条未读消息）<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/Setup">账户信息</a></li>
+                            <li><a href="/RealNameSetup">实名验证</a></li>
+                            <li><a href="/SafetySetup">安全</a></li>
+                            <li><a href="/Upload">模型管理</a></li>
+                            <li><a href="/Message">消息（
+                                #if($Count)
+                                ${Count}
+                                #end
+                                ）</a>
+                            </li>
+                            <li><a href="/InterestAll">全部兴趣圈</a></li>
+                            <li><a href="/Interest">我的兴趣圈</a></li>
+                            <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            #foreach($vo in $ArtWorkUserImage)
+            <img src="${vo.image}" id="titlefirst">
+            #end
+            #foreach($vo in $ArtWorkUser)
+            <div style="float: left;margin-left: 10px;margin-top: -10px">
+                <p>$!{vo.name}</p>
+            </div>
+            #end
+            #foreach($vo in $ArtWorkFollow)
+            <form style="display: inline">
+                <input style="display: none" name="followclass" value="${vo.classname}" id="sharejudge">
+                <a title="关注这个用户"><span class="${vo.classname}" aria-hidden="true" id="titlesecond" onclick="follow()"></span></a>
+            </form>
+            #end
+            #foreach($vo in $ArtWorkPraise)
+            <form style="display: inline">
+                <input style="display: none" name="praiseclass" value="${vo.classname}">
+                <a title="点赞这个艺术品"><span class="${vo.classname}" aria-hidden="true" id="titleone" onclick="like()"></span></a>
+            </form>
+            #end
+            <a title="放大图片"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true" id="titletwo" onclick="large()"></span></a>
+            <a title="分享3D链接"><span class="glyphicon glyphicon-send" aria-hidden="true" id="titlethree" onclick="iframe()"></span></a>
+            <div class="jiathis_style" style="margin-left: 1%;float: left;margin-top: -3px">
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"></a>
+            </div>
+        </div>
+    </div>
+    <iframe id ="iframe" class="FlexEmbed-content" src="/Viewer?modelId=yunbor_deer" scrolling="no" frameborder="0" style="width: 90%;height: 600px;margin-left: 5%"></iframe>
+    #foreach($vo in $ArtWork)
+    <div class="well" style="width: 90%;margin-left: 5%">
+        <p style="font-size: 25px;font-family: 华文新魏">$!{vo.wtitle}</p>
+        <p style="font-size: 20px;font-family: 华文仿宋">$!{vo.wyears}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    $!{vo.wartist}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    $!{vo.wcollector}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    $!{vo.wtype}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    $!{vo.wplace}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    长：$!{vo.wlength}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    宽：$!{vo.wwidth}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    高：$!{vo.wheight}</p>
+        <p style="font-size: 20px;font-family: 华文行楷">&nbsp;&nbsp;${vo.wtext}</p>
+    </div>
+    #end
+    <div id="flip">
+        <p style="font-size: 20px;font-family: 华文隶书;margin-top: 13px;float: left">评论</p>
+        <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="down"></span>
+    </div>
+    <div id="panel">
+        <div id="comment">
+            <dl id="list">
+                #foreach($vo in $ArtWorkComment)
+                <dt class="dt1">$!{vo.name}：${vo.text}</dt>
+                #end
+            </dl>
+        </div>
+        <form method="post" name="CommentForm">
+            <div id="send">
+                <input id="word" name="word">
+                <span class="glyphicon glyphicon-send"  aria-hidden="true" style="margin-left: 3%;margin-top: 12px;cursor: pointer;font-size: 20px" onclick="send()"></span>
+                <span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="margin-left: 3%;margin-top: 12px;cursor: pointer;font-size: 20px" onclick="share()"></span>
+                <span class="glyphicon glyphicon-menu-up" aria-hidden="true" id="up"></span>
+            </div>
+        </form>
+    </div>
+    <script src="/static/js/googleapisjquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/staticassets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src=""></script>
+    <script src="/static/docs/assets/js/vendor/holder.min.js"></script>
+    <script src="/static/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+<script type="text/javascript">
+    function follow()
+    {
+        var x=document.getElementById("titlesecond");
+        var classname=x.getAttribute("class");
+        $.ajax({
+            type: "POST",
+            url: "/ArtWorkFollow",
+            data:{"followclass":classname}
+        });
+        if(x.getAttribute("class")=="glyphicon glyphicon-plus-sign")
+        {
+            x.setAttribute("class","glyphicon glyphicon-minus-sign");
+        }
+        else {
+            x.setAttribute("class","glyphicon glyphicon-plus-sign");
+        }
+    }
+    function like()
+    {
+        var x=document.getElementById("titleone");
+        var classname=x.getAttribute("class");
+        $.ajax({
+            type: "POST",
+            url: "/ArtWorkPraise",
+            data:{"praiseclass":classname}
+        });
+        if(x.getAttribute("class")=="glyphicon glyphicon-heart-empty")
+        {
+            x.setAttribute("class","glyphicon glyphicon-heart");
+        }
+        else {
+            x.setAttribute("class","glyphicon glyphicon-heart-empty");
+        }
+    }
+    function large()
+    {
+        window.open("/ArtWorkLarge");
+    }
+    function iframe()
+    {
+        var sharejudge = document.getElementById("sharejudge").value;
+        if(sharejudge=="glyphicon glyphicon-minus-sign")
+        {
+            var str="10.101.1.151/Viewer?jsonFilePath=bigjinci_10k_0.5k.js";
+            alert("如果需要调用3D展示，请在网页中插入以下链接：\n<iframe src=\""+str+"\"></iframe>\n谢谢");
+        }
+        else
+        {
+            alert("您未获得权限，请去付费！");
+        }
+    }
+    function at()
+    {
+        document.getElementById("word").value="@";
+    }
+    function send()
+    {
+        document.CommentForm.action="/ArtWorkCom";
+        document.CommentForm.submit();
+    }
+    function share()
+    {
+        document.CommentForm.action="/ArtWorkShare";
+        document.CommentForm.submit();
+    }
+    $(document).ready(function()
+    {
+        $("#flip").click(function()
+        {
+            $("#panel").slideDown("slow");
+        });
+    });
+    $(document).ready(function()
+    {
+        $("#up").click(function()
+        {
+            $("#panel").slideUp("slow");
+        });
+    });
+    $(document).ready(function(){
+        $("#list dt:even").addClass("dt2");
+    });
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+    function onLoad()
+    {
+        var x = Math.ceil(Math.random()*10);
+        if(x%4==1){
+            document.getElementById("iframe").src="/Viewer?objFilePath=YunMuseum_deer-obj.obj&mtlFilePath=YunMuseum_deer-obj.mtl";
+        }
+        else if(x%4==2){
+            document.getElementById("iframe").src="/Viewer?objFilePath=YunMuseum_courage_apply.obj&mtlFilePath=YunMuseum_courage_apply.mtl";
+        }
+        else if(x%4==3){
+            document.getElementById("iframe").src="/Viewer?objFilePath=YunMuseum_1.obj&mtlFilePath=YunMuseum_1.mtl";
+        }
+        else{
+            document.getElementById("iframe").src="/Viewer?objFilePath=YunMuseum_cartDog.obj&mtlFilePath=YunMuseum_cartDog.mtl";
+        }
+    }
+    function signout(){
+        document.cookie="username="+"";
+    }
+</script>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>模型管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/maxcdnfont-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/Style.css">
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="/static/js/csdnjquery.min.js"></script>
+    <script src="/static/js/csdnbootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/ie10-viewport-bug-workaround.css">
+    <script src="/static/js/docs.min.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/classie.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="/MyArt">我的发布</a></li>
+                        <li><a href="/MyConcern">我关注的</a></li>
+                        <li><a href="/MyPraise">我喜欢的</a></li>
+                        <li><a href="/MyShare">我的帖子</a></li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default" 	data-toggle="dropdown">
+                            个人设置（有
+                            #if($Count)
+                            ${Count}
+                            #end
+                            条未读消息）<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/Setup">账户信息</a></li>
+                            <li><a href="/RealNameSetup">实名验证</a></li>
+                            <li><a href="/SafetySetup">安全</a></li>
+                            <li><a href="/Upload">模型管理</a></li>
+                            <li><a href="/Message">消息（
+                                #if($Count)
+                                ${Count}
+                                #end
+                                ）</a>
+                            </li>
+                            <li><a href="/InterestAll">全部兴趣圈</a></li>
+                            <li><a href="/Interest">我的兴趣圈</a></li>
+                            <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                        </ul>
+                    </div>
+                </form>
+          </div>
+        </div>
+    </nav>
+    <div class="col-sm-3 col-md-2">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <div style="text-align:center; clear:both">
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul id="accord" class="accord">
+                        <div class="link"><li><a href="/Setup">账户信息</a></li></div>
+                        <div class="link"><li><a href="/RealNameSetup">实名验证</a></li></div>
+                        <div class="link"><li><a href="/SafetySetup">安全</a></li></div>
+                        <div class="link"><li><a href="/Upload">模型管理</a></li></div>
+                        <div class="link"><li><a href="/Message">消息</a></li></div>
+                        <div class="link"><li><a href="/HomeArt" onclick="signout()">登出</a></li></div>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <table border="1" width="1000" style="margin-left: 300px;margin-top: 50px" >
+        <thead>
+        <tr>
+            <td>艺术品编号</td>
+            <td>标题</td>
+            <td>年份</td>
+            <td>原作者</td>
+            <td>收藏者</td>
+            <td>类型</td>
+            <td>地点</td>
+            <td>上传时间</td>
+            <td>点击数量</td>
+            <td>点赞数量</td>
+            <td>删除</td>
+        </tr>
+        </thead>
+        #foreach($vo in $ArtWork)
+        <tbody>
+        <tr>
+            <td>$!{vo.workid}</td>
+            <td>$!{vo.wtitle}</td>
+            <td>$!{vo.wyears}</td>
+            <td>$!{vo.wartist}</td>
+            <td>$!{vo.wcollector}</td>
+            <td>$!{vo.wtype}</td>
+            <td>$!{vo.wplace}</td>
+            <td>$date.format('yyyy-MM-dd HH:mm:ss ',$vo.wtime)</td>
+            <td>$!{vo.wclick}</td>
+            <td>$!{vo.wpraise}</td>
+            <form action="/UploadDelete" method="post">
+                <input name="workid" value="${vo.workid}" style="display: none">
+                <td><button type="submit">删除</button></td>
+            </form>
+        </tr>
+        </tbody>
+        #end
+    </table>
+</body>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+    showLeft = document.getElementById( 'showLeft' ),
+    body = document.body;
+    showLeft.onclick = function()
+    {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuLeft, 'nav-sidebar-open' );
+        disableOther( 'showLeft' );
+    };
+    function disableOther( button )
+    {
+        if( button !== 'showLeft' )
+        {
+            classie.toggle( showLeft, 'disabled' );
+        }
+    }
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+    function signout() {
+        document.cookie="username="+"";
+    }
+</script>
+</html>

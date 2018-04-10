@@ -1,0 +1,15 @@
+body
+{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+input
+{
+    line-height: 150%;
+    width: 40%;
+}
+select
+{
+    line-height: 30px;
+    width: 200px;
+}

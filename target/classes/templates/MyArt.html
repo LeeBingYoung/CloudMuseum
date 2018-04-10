@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>我的发布</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/docs/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/static/docs/examples/dashboard/home.css" rel="stylesheet">
+	<script src="/static/js/csdnjquery.min.js"></script>
+	<script src="/static/js/csdnbootstrap.min.js"></script>
+    <script src="/static/docs/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="/static/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+     <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+     <script src="/static/js/maxcdnrespond.min.js"></script>
+    <style>
+        *
+        {
+            margin:0px;
+            padding:0px;
+        }
+        li img
+        {
+            width: 280px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                       <span class="sr-only">Toggle navigation</span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <div class="center-block">
+                       <ul class="nav navbar-nav" >
+                           <li><a href="/MyArt">我的发布</a></li>
+                           <li><a href="/MyConcern">我关注的</a></li>
+                           <li><a href="/MyPraise">我喜欢的</a></li>
+                           <li><a href="/MyShare">我的帖子</a></li>
+                       </ul>
+                  </div>
+                  <form class="navbar-form navbar-right">
+                      <div class="btn-group">
+                          <button class="btn btn-default" 	data-toggle="dropdown">
+                              个人设置（有
+                              #if($Count)
+                              ${Count}
+                              #end
+                              条未读消息）<span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                              <li><a href="/Setup">账户信息</a></li>
+                              <li><a href="/RealNameSetup">实名验证</a></li>
+                              <li><a href="/SafetySetup">安全</a></li>
+                              <li><a href="/Upload">模型管理</a></li>
+                              <li><a href="/Message">消息（
+                                  #if($Count)
+                                  ${Count}
+                                  #end
+                                  ）</a>
+                              </li>
+                              <li><a href="/InterestAll">全部兴趣圈</a></li>
+                              <li><a href="/Interest">我的兴趣圈</a></li>
+                              <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                          </ul>
+                      </div>
+                      <button class="btn btn-default" 	data-toggle="dropdown">
+                          上传<b class="caret"></b>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a data-toggle="modal" data-target="#model" href="">模型&图片</a></li>
+                          <li><a href="/Identity">专栏</a></li>
+                      </ul>
+                  </form>
+              </div>
+          </div>
+    </nav>
+    <div id="model" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">模型&图片</h1>
+                </div>
+                <div class="modal-body">
+                    <form  method="post" enctype="multipart/form-data" name="upload" onsubmit="goto()" action="/UploadModel">
+                        <label>模型名称</label><input name="wtitle" size="12"><br/>
+                        <label>年代</label>
+                        <select name="wyears">
+                            <option value="先秦">先秦</option>
+                            <option value="秦汉">秦汉</option>
+                            <option value="隋唐宋元">隋唐宋元</option>
+                            <option value="明清">明清</option>
+                            <option value="近现代">近现代</option>
+                        </select>
+                        <br/>
+                        <label>类别</label>
+                        <select name="wtype">
+                            <option value="陶瓷">陶瓷</option>
+                            <option value="字画">字画</option>
+                            <option value="玉器">玉器</option>
+                            <option value="杂项">杂项</option>
+                        </select>
+                        <br/>
+                        <label>介绍</label><input name="wtext" size="12"><br/>
+                        <label>模型</label><input type="file" class="form-control" name="file">
+                        <div class="text-right">
+                            <input class="btn btn-primary" type="submit" value="上传">
+                            <input class="btn btn-danger" data-dismiss="modal" value="取消">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+   		  <div class="row">
+              <div class="col-xs-6 col-sm-4" style="margin-left: -45px;">
+                  <ul>
+                      #foreach($vo in $ArtWork)
+                      <div class="img">
+                          <form action="/ArtWork" method="post">
+                              <input type="image" src="${vo.wimage}" style="width: 300px;height: 260px" alt="Work">
+                              <input name="artwork" value="${vo.workid}" style="display: none;">
+                          </form>
+                          <table>
+                              <tr>
+                                  <td>
+                                      <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                      </button>
+                                  </td>
+                                  <td>&emsp;</td>
+                                  <td>&emsp;</td>
+                                  <td>$!{vo.wtitle}</td>
+                                  <td>&emsp;</td>
+                                  <td>$date.format('yyyy-MM-dd',$vo.wtime)</td>
+                                  <td>&emsp;</td>
+                                  <td>$!{vo.wtype}</td>
+                              </tr>
+                          </table>
+                          <p class="desc">$!{vo.wtext}</p>
+                      </div>
+                      #end
+                  </ul>
+              </div>
+              <div class="col-xs-6 col-sm-4" style="margin-left: 62px;">
+                  <ul>
+                      #foreach($vo in $ArtCol)
+                      <div class="img">
+                          <form action="/ArtCol" method="post">
+                              <input  type="image" src="${vo.cimage}" style="width: 300px;height: 260px" alt="Work">
+                              <input style="display: none;" name="artcol" value="${vo.colid}">
+                          </form>
+                          <table>
+                              <tr>
+                                  <td>
+                                      <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                      </button>
+                                  </td>
+                                  <td>&emsp;</td>
+                                  <td>&emsp;</td>
+                                  <td>$!{vo.ctitle}</td>
+                                  <td>&emsp;</td>
+                                  <td>$date.format('yyyy-MM-dd',$vo.cctime)</td>
+                                  <td>&emsp;</td>
+                                  <td>$!{vo.ctype}</td>
+                              </tr>
+                          </table>
+                          <p class="desc">$!{vo.cabstract}</p>
+                      </div>
+                      #end
+                  </ul>
+              </div>
+	      </div>
+    </div>
+    <script src="/static/js/googleapisjquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/staticassets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src=""></script>
+    <script src="/static/docs/assets/js/vendor/holder.min.js"></script>
+    <script src="/static/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+<script>
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+    function goto(){
+        username=getCookie("username");
+        document.upload.action ="?username="+ username+"&worktitle="+document.upload.url.value;
+    }
+    function signout(){
+        document.cookie="username="+"";
+    }
+</script>
+</html>

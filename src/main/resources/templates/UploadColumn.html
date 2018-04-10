@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/wangEditor.min.css">
+    <style type="text/css">
+        #editor-trigger {
+            height: 400px;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>专栏上传</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+    <link href="/static/docs/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/static/docs/examples/dashboard/home.css" rel="stylesheet">
+    <link rel="icon" href="/static/images/favicon.ico">
+    <script src="/static/js/csdnjquery.min.js"></script>
+    <script src="/static/js/csdnbootstrap.min.js"></script>
+</head>
+<body style="padding:0 20px;">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="/MyArt">我的发布</a></li>
+                        <li><a href="/MyConcern">我关注的</a></li>
+                        <li><a href="/MyPraise">我喜欢的</a></li>
+                        <li><a href="/MyShare">我的帖子</a></li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default" 	data-toggle="dropdown">
+                            个人设置（有
+                            #if($Count)
+                            ${Count}
+                            #end
+                            条未读消息）<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/Setup">账户信息</a></li>
+                            <li><a href="/RealNameSetup">实名验证</a></li>
+                            <li><a href="/SafetySetup">安全</a></li>
+                            <li><a href="/Upload">模型管理</a></li>
+                            <li><a href="/Message">消息（
+                                #if($Count)
+                                ${Count}
+                                #end
+                                ）</a>
+                            </li>
+                            <li><a href="/InterestAll">全部兴趣圈</a></li>
+                            <li><a href="/Interest">我的兴趣圈</a></li>
+                            <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top: 100px" style="width:100%;text-align: center">
+        <form action="/UploadColumn" method="post" enctype="multipart/form-data">
+            <ul><label style="margin-left:320px;">图像</label><input type="file" name="file1" style="margin-left: 360px"></ul>
+            <ul><label style="margin-left:320px;">图像</label><input type="file" name="file2" style="margin-left: 360px"></ul>
+            <ul><label style="margin-left:320px;">图像</label><input type="file" name="file3" style="margin-left: 360px"></ul>
+            <ul><label style="margin-left:320px;">图像</label><input type="file" name="file4" style="margin-left: 360px"></ul>
+            <ul><label class="reg_label" id="name_label" style="margin-left:320px;">名称</label><input type="text" placeholder="请输入文物名称" type="text" id="name"  name="name" style="margin-left: 32px" required></ul>
+            <ul><label style="margin-left:320px;" name="id_num" required>地点</label><input type="text" placeholder="请输入地点" type="text" id="place" name="place" style="margin-left: 32px" required ></ul>
+            <ul><label style="margin-left:320px;" name="id_num" required>种类</label><input type="text" placeholder="请输入种类" type="text" id="type" name="type" style="margin-left: 32px" required ></ul>
+            <ul><label style="margin-left:320px;" name="id_num" required>年份</label><input type="text" placeholder="请输入年份" type="text" id="year" name="year" style="margin-left: 32px" required ></ul>
+            <div id="editor-container" class="container">
+                <div id="editor-trigger"></div>
+            </div>
+            <ul><button type="submit" class="templatemo-blue-button width-100" style="margin-left: 500px;" onclick="f()">上传</button></ul>
+            <p><br></p>
+            <input value="" id="zhengwen" name="zhengwen" required style="display: none">
+        </form>
+    </div>
+    <script>
+        function f()
+        {
+            var temp=document.getElementById("editor-trigger").innerHTML;
+            document.getElementById('zhengwen').value=temp;
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/wangeditor.min.js"></script>
+    <script type="text/javascript">
+        // 阻止输出log
+        // wangEditor.config.printLog = false;
+
+        var editor = new wangEditor('editor-trigger');
+
+        // 上传图片
+        editor.config.uploadImgUrl = '/upload';
+        editor.config.uploadParams = {
+            // token1: 'abcde',
+            // token2: '12345'
+        };
+        editor.config.uploadHeaders = {
+            // 'Accept' : 'text/x-json'
+        }
+        // editor.config.uploadImgFileName = 'myFileName';
+
+        // 隐藏网络图片
+        // editor.config.hideLinkImg = true;
+
+        // 插入代码时的默认语言
+        // editor.config.codeDefaultLang = 'html'
+
+        // 只粘贴纯文本
+        // editor.config.pasteText = true;
+
+        // 跨域上传
+        // editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+
+        // 第三方上传
+        // editor.config.customUpload = true;
+
+        // 普通菜单配置
+        editor.config.menus =     [
+          'source',
+          '|',
+          'bold',
+          'underline',
+          'italic',
+          'strikethrough',
+          'eraser',
+          'forecolor',
+          'bgcolor',
+          '|',
+          'quote',
+          'fontfamily',
+          'fontsize',
+          'head',
+          'unorderlist',
+          'orderlist',
+          'alignleft',
+          'aligncenter',
+          'alignright',
+          '|',
+          'link',
+          'unlink',
+          'table',
+          '|',
+          'img',
+          '|',
+          'undo',
+          'redo',
+          'fullscreen',
+          '|',
+        //  'model3d'
+    ];
+
+        // onchange 事件
+        editor.onchange = function () {
+            console.log(this.$txt.html());
+        };
+
+        // 取消过滤js
+        // editor.config.jsFilter = false;
+
+        // 取消粘贴过来
+        // editor.config.pasteFilter = false;
+
+        // 设置 z-index
+        // editor.config.zindex = 20000;
+
+        // 语言
+        // editor.config.lang = wangEditor.langs['en'];
+
+        // 自定义菜单UI
+        // editor.UI.menus.bold = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
+        //     selected: '.selected'
+        // };
+        // editor.UI.menus.italic = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
+        //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
+        // };
+        editor.create();
+
+        $('#btn1').click(function () {
+          // 获取编辑器区域完整html代码
+          var html = editor.$txt.html();
+          // 获取编辑器纯文本内容
+          var text = editor.$txt.text();
+          // 获取格式化后的纯文本
+          var formatText = editor.$txt.formatText();
+          //　直接打印在下面
+          var textNode = document.createTextNode(formatText);
+          document.body.appendChild(textNode);
+        });
+    </script>
+    <script src="/static/js/googleapisjquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src=""></script>
+    <script src="/static/docs/assets/js/vendor/holder.min.js"></script>
+    <script src="/static/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+<script>
+    function signout(){
+        document.cookie="username="+"";
+    }
+</script>
+</html>

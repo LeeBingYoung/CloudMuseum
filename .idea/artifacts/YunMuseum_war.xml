@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="YunMuseum:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="YunMuseum-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="YunMuseum:war exploded" />
+    </root>
+  </artifact>
+</component>

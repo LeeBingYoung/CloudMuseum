@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>艺术专栏</title>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+    #foreach($vo in $ArtColLarge)
+    <div style="text-align: center">
+        <img src="${vo.image}" onclick="small()" style="cursor: pointer;text-align: center;width: 90%;height: 90%">
+    </div>
+    #end
+</body>
+<script type="text/javascript">
+    function small()
+    {
+        window.close();
+    }
+</script>
+</html>

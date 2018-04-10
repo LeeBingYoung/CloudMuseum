@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>艺术品搜索结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/maxcdnfont-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/Style.css">
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/ie10-viewport-bug-workaround.css">
+    <script src="/static/assets/js/docs.min.js"></script>
+    <script src="/static/js/jquery-2.2%20stable.js"></script>
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/classie.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" method="post" name="SearchForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" name="searchtext">
+                </div>
+                <span class="btn btn-default" onclick="search()">搜索</span>
+            </form>
+            <div class="center-block">
+                <ul class="nav navbar-nav" >
+                    <li><a href="/HomeArt">艺术品</a></li>
+                    <li><a href="/HomeStory">艺术故事</a></li>
+                    <li><a href="/HomeCol">艺术专栏</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+#foreach ($vo in $ArtWorkWName)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWTitle)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWYears)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWArtist)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWCollector)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWType)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWPlace)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWText)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+#foreach ($vo in $ArtWorkWTime)
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="img">
+        <form action="/ArtWork" method="post">
+            <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+            <input name="artwork" value="${vo.workid}" style="display: none;">
+        </form>
+        <table>
+            <tr>
+                <td>
+                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                <td>$!{vo.wtitle}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wyears}</td><td>&emsp;</td><td>&emsp;</td>
+                <td>$!{vo.wtype}</td>
+            </tr>
+        </table>
+        <p class="desc">$!{vo.wtext}</p>
+    </div>
+</div>
+#end
+<div style="width: 1024px;margin-top: 30px;margin-left: 30px">
+    <p>百度搜索：</p>
+    #if($baidusearch)
+    ${baidusearch}
+    #end
+</div>
+</body>
+<script type="text/javascript">
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+        showLeft = document.getElementById( 'showLeft' ),
+        body = document.body;
+    showLeft.onclick = function()
+    {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuLeft, 'nav-sidebar-open' );
+        disableOther( 'showLeft' );
+    };
+    function disableOther( button )
+    {
+        if( button !== 'showLeft' )
+        {
+            classie.toggle( showLeft, 'disabled' );
+        }
+    }
+    function search()
+    {
+        document.SearchForm.action="/SearchWork";
+        document.SearchForm.submit();
+    }
+</script>
+</html>

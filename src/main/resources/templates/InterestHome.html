@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>兴趣圈主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/maxcdnfont-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/Interest.css" rel="stylesheet">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/Style.css">
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/ie10-viewport-bug-workaround.css">
+    <script src="/static/assets/js/docs.min.js"></script>
+    <script src="/static/js/jquery-2.2%20stable.js"></script>
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/classie.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+    <script type="text/javascript" src="/static/js/base.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="/MyArt">我的发布</a></li>
+                        <li><a href="/MyConcern">我关注的</a></li>
+                        <li><a href="/MyPraise">我喜欢的</a></li>
+                        <li><a href="/MyShare">我的帖子</a></li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default" 	data-toggle="dropdown">
+                            个人设置（有
+                            #if($Count)
+                            ${Count}
+                            #end
+                            条未读消息）<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/Setup">账户信息</a></li>
+                            <li><a href="/RealNameSetup">实名验证</a></li>
+                            <li><a href="/SafetySetup">安全</a></li>
+                            <li><a href="/Upload">模型管理</a></li>
+                            <li><a href="/Message">消息（
+                                #if($Count)
+                                ${Count}
+                                #end
+                                ）</a>
+                            </li>
+                            <li><a href="/InterestAll">全部兴趣圈</a></li>
+                            <li><a href="/Interest">我的兴趣圈</a></li>
+                            <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="zhuti">
+        <img src="/static/images/InterestHome.jpg">
+        <div class="zhutiwenzi">
+            #foreach($vo in $Interest)
+            <a href="#" style=" font-size:22px;">$!{vo.placename}</a>
+            <a href="#" style=" font-size:26px;">$!{vo.yearsname}时期  $!{vo.typename}圈</a>
+            #if($CountInterestMember)
+            <input id="countnum" value="${CountInterestMember}" style="display: none">
+            <a href="/InterestMember" target="_blank" id="acount">${CountInterestMember}位关注者</a>
+            #end
+            #end
+            <br/>
+            <br/>
+            <form name="AddInterestForm">
+                #if($but)
+                <button type="button" id="anniu" style="cursor: pointer" value="${but}" onclick="addinterest()">${but}</button>
+                #end
+            </form>
+        </div>
+    </div>
+    #foreach($vo in $InterestShareWork)
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="img">
+            <img src="${vo.image}" style="width: 30px;height: 30px;float: left">
+            <p style="float: left;margin-top: 15px">$!{vo.name}：${vo.text}</p>
+            <form action="/ArtWork" method="post" style="display: inline">
+                <input type="image" src="${vo.wimage}" style="width: 280px;height: 260px" alt="Work">
+                <input name="artwork" value="${vo.workid}" style="display: none;">
+            </form>
+            <span class="glyphicon glyphicon-time" aria-hidden="true" style="font-size: 15px"></span>${vo.wtime}
+            <br/>
+            <form action="/InterestComment" method="post" name="CommentForm" style="display: inline">
+                <input type="image" src="/static/images/artwork/u340.png" style="width: 20px;height:20px;cursor: pointer">
+                <input name="interestworkid" value="${vo.workid}" style="display: none;">
+            </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <form action="/InterestHomeShare" method="post" name="ShareForm" style="display: inline">
+                <input type="image" src="/static/images/artwork/u354.png" style="cursor: pointer;width: 20px;height: 20px">
+                <input name="interestworkid" value="${vo.workid}" style="display: none;">
+            </form>
+        </div>
+    </div>
+    #end
+</body>
+<script type="text/javascript">
+    function interestshare()
+    {
+        document.ShareForm.submit();
+    }
+    function interestcomment()
+    {
+        document.CommentForm.submit();
+    }
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+    function addinterest()
+    {
+        var x = document.getElementById("anniu");
+        if(x.value=="已加入")
+        {
+            alert("您已加入该兴趣圈！");
+        }
+        if(x.value=="加入")
+        {
+            x.innerHTML="已加入";
+            var a = document.getElementById("countnum").value;
+            var b = document.getElementById("acount");
+            b.innerHTML = parseInt(a) + 1 + "位关注者";
+            $.ajax({
+                type: "POST",
+                url: "/InterestHomeAdd"
+            });
+        }
+    }
+    function signout(){
+        document.cookie="username="+"";
+    }
+</script>
+</html>

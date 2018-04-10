@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>兴趣圈</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/maxcdnfont-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/Interest.css" rel="stylesheet">
+    <link href="/static/css/Home.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/Style.css">
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/ie10-viewport-bug-workaround.css">
+    <script src="/static/assets/js/docs.min.js"></script>
+    <script src="/static/js/jquery-2.2%20stable.js"></script>
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/classie.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="/MyArt">我的发布</a></li>
+                        <li><a href="/MyConcern">我关注的</a></li>
+                        <li><a href="/MyPraise">我喜欢的</a></li>
+                        <li><a href="/MyShare">我的帖子</a></li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default" 	data-toggle="dropdown">
+                            个人设置（有
+                            #if($Count)
+                            ${Count}
+                            #end
+                            条未读消息）<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/Setup">账户信息</a></li>
+                            <li><a href="/RealNameSetup">实名验证</a></li>
+                            <li><a href="/SafetySetup">安全</a></li>
+                            <li><a href="/Upload">模型管理</a></li>
+                            <li><a href="/Message">消息（
+                                #if($Count)
+                                ${Count}
+                                #end
+                                ）</a>
+                            </li>
+                            <li><a href="/InterestAll">全部兴趣圈</a></li>
+                            <li><a href="/Interest">我的兴趣圈</a></li>
+                            <li><a href="/HomeArt" onclick="signout()">登出</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    #foreach($vo in $InterestNo)
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="img">
+            <form action="/InterestHomeNo" method="post">
+                <input type="image" src="${vo.image}" style="width: 280px;height: 260px">
+                <input name="interestid" value="${vo.interestid}" style="display: none;">
+            </form>
+            <table>
+                <tr style="text-align: center">
+                    <td>
+                    <td style="font-size: 20px;font-family: 方正舒体">${vo.placename}</td><td>&emsp;</td><td>&emsp;</td>
+                    <td style="font-size: 20px;font-family: 幼圆">${vo.yearsname}时期</td><td>&emsp;</td><td>&emsp;</td>
+                    <td style="font-size: 20px;font-family: 华文行楷">${vo.typename}圈</td>
+                </tr>
+            </table>
+            <form action="/InterestAdd" method="post">
+                <input type="submit" style="font-size: 20px;font-family: 隶书" value="点击加入" class="btn btn-default">
+                <input name="interestid" value="${vo.interestid}" style="display: none;">
+            </form>
+        </div>
+    </div>
+    #end
+    #foreach($vo in $InterestYes)
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="img">
+            <form action="/InterestHome" method="post">
+                <input type="image" src="${vo.image}" style="width: 300px;height: 260px">
+                <input name="interestid" value="${vo.interestid}" style="display: none;">
+            </form>
+            <table>
+                <tr style="text-align: center">
+                    <td>
+                    <td style="font-size: 20px;font-family: 方正舒体">$!{vo.placename}</td><td>&emsp;</td><td>&emsp;</td>
+                    <td style="font-size: 20px;font-family: 幼圆">$!{vo.yearsname}时期</td><td>&emsp;</td><td>&emsp;</td>
+                    <td style="font-size: 20px;font-family: 华文行楷">$!{vo.typename}圈</td>
+                </tr>
+            </table>
+            <form action="/InterestOut" method="post">
+                <input type="submit" style="font-size: 20px;font-family: 隶书" value="点击退出" class="btn btn-default">
+                <input name="interestid" value="${vo.interestid}" style="display: none;">
+            </form>
+        </div>
+    </div>
+    #end
+</body>
+<script>
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+    function signout(){
+        document.cookie="username="+"";
+    }
+</script>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    #foreach($vo in $User)
+    <title>$!{vo.name}的发布</title>
+    #end
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/docs/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/static/docs/examples/dashboard/home.css" rel="stylesheet">
+    <script src="/static/js/csdnjquery.min.js"></script>
+    <script src="/static/js/csdnbootstrap.min.js"></script>
+    <link rel="icon" href="/static/images/favicon.ico">
+    <script src="/static/docs/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="/static/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="/static/js/maxcdnhtml5shiv.min.js"></script>
+    <script src="/static/js/maxcdnrespond.min.js"></script>
+    <style>
+        *
+        {
+            margin:0px;
+            padding:0px;
+        }
+        li img
+        {
+            width: 280px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/HomeArt">YunMuseum</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="center-block">
+                    <ul class="nav navbar-nav" >
+                        #foreach($vo in $User)
+                        <li><a href="#">$!{vo.name}的发布</a></li>
+                        #end
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-4" style="margin-left: -45px;">
+                <ul>
+                    #foreach($vo in $ArtWork)
+                    <div class="img">
+                        <form action="/ArtWork" method="post">
+                            <input type="image" src="${vo.wimage}" style="width: 300px;height: 260px" alt="Work">
+                            <input name="artwork" value="${vo.workid}" style="display: none;">
+                        </form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td>&emsp;</td>
+                                <td>&emsp;</td>
+                                <td>$!{vo.wtitle}</td>
+                                <td>&emsp;</td>
+                                <td>$date.format('yyyy-MM-dd',$vo.wtime)</td>
+                                <td>&emsp;</td>
+                                <td>$!{vo.wtype}</td>
+                            </tr>
+                        </table>
+                        <p class="desc">$!{vo.wtext}</p>
+                    </div>
+                    #end
+                </ul>
+            </div>
+            <div class="col-xs-6 col-sm-4" style="margin-left: 62px;">
+                <ul>
+                    #foreach($vo in $ArtCol)
+                    <div class="img">
+                        <form action="/ArtCol" method="post">
+                            <input  type="image" src="${vo.cimage}" style="width: 300px;height: 260px" alt="Work">
+                            <input style="display: none;" name="artcol" value="${vo.colid}">
+                        </form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button style="border: 0; outline: none" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td>&emsp;</td>
+                                <td>&emsp;</td>
+                                <td>$!{vo.ctitle}</td>
+                                <td>&emsp;</td>
+                                <td>$date.format('yyyy-MM-dd',$vo.cctime)</td>
+                                <td>&emsp;</td>
+                                <td>$!{vo.ctype}</td>
+                            </tr>
+                        </table>
+                        <p class="desc">$!{vo.cabstract}</p>
+                    </div>
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function search()
+    {
+        document.SearchForm.action="/Search";
+        document.SearchForm.submit();
+    }
+</script>
+</html>
